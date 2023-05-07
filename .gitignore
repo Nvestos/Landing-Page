@@ -1,0 +1,22 @@
+# Node.js related files
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE or editor specific files
+.vscode/
+.idea/
+*.iml
+
+# Environment specific files
+.env
+
+# Build output files
+dist/
+build/
+out/
+*.log
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
