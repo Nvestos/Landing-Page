@@ -4,6 +4,7 @@ const app = createApp({
     return {
       msg: "Hi, Nvestos!",
       isDarkMode: false,
+      showOptIn: false,
       currentYear: new Date().getFullYear(),
     };
   },
@@ -41,7 +42,7 @@ const app = createApp({
       }
     },
     toggleWaitingList() {
-      console.log("Clicked");
+      this.showOptIn = !this.showOptIn;
     },
   },
 });

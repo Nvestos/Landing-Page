@@ -49,6 +49,56 @@
       <button @click="toggleTheme" id="themeToggle" class="theme-toggle">
         <i :class="[themeIconClass]" id="themeIcon"></i>
       </button>
+      <div
+        class="nv-modal"
+        :class="{
+       'nv-modal--open':showOptIn
+      }"
+      >
+        <div class="nv-modal__content">
+          <div class="d-flex justify-content-end">
+            <span
+              href="javascript:void(0)"
+              class="close text-muted nv-text cursor--pointer"
+              @click="toggleWaitingList"
+            >
+              <i class="bi bi-x-lg"></i>
+            </span>
+          </div>
+          <div class="mt-4">
+            <div class="mb-5">
+              <h4 class="nv-h4 text-is--dark">Join Waiting list</h4>
+            </div>
+            <form action="#!" class="pb-5">
+              <div class="form-group">
+                <input
+                  class="nv-input"
+                  type="text"
+                  name=""
+                  id=""
+                  placeholder="Full Name..."
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  class="nv-input"
+                  type="email"
+                  name=""
+                  id=""
+                  placeholder="Email..."
+                  required
+                />
+              </div>
+              <div class="mt-4">
+                <button class="nv-button nv-button--primary w-100">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
       <header class="nv-header">
         <nav
           class="container nv-nav d-flex align-items-center justify-content-between"
@@ -107,7 +157,7 @@
           class="container nv-section__channels"
           data-aos="zoom-in-up"
           data-aos-easing="linear"
-          data-aos-duration="400"
+          data-aos-duration="800"
         >
           <div class="row align-items-center">
             <div class="col-lg-6">
@@ -134,7 +184,7 @@
           class="container nv-section__channels"
           data-aos="zoom-in-up"
           data-aos-easing="linear"
-          data-aos-duration="400"
+          data-aos-duration="800"
         >
           <div class="row align-items-center">
             <div class="col-lg-6">
@@ -163,7 +213,7 @@
           class="container nv-section__channels"
           data-aos="zoom-in-up"
           data-aos-easing="linear"
-          data-aos-duration="400"
+          data-aos-duration="800"
         >
           <div class="row align-items-center">
             <div class="col-lg-6">
@@ -193,7 +243,7 @@
           class="container nv-section__channels"
           data-aos="zoom-in-up"
           data-aos-easing="linear"
-          data-aos-duration="400"
+          data-aos-duration="800"
         >
           <div class="row align-items-center">
             <div class="col-lg-6">
@@ -222,7 +272,7 @@
           class="container nv-section__channels"
           data-aos="zoom-in-up"
           data-aos-easing="linear"
-          data-aos-duration="400"
+          data-aos-duration="800"
         >
           <div class="row align-items-center">
             <div class="col-lg-6">
@@ -251,7 +301,7 @@
           class="container bg--primary-fade has--large-radius"
           data-aos="zoom-in-up"
           data-aos-easing="linear"
-          data-aos-duration="400"
+          data-aos-duration="800"
         >
           <div class="col-lg-5 mx-auto px-0 py-5 text-center">
             <h3 class="nv-h3 text-is--dark">
