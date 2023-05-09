@@ -7,7 +7,50 @@
       name="description"
       content="Our community offers a space for traders to post signals and for copy traders to auto-copy the trades of professional traders. Join Waiting List"
     />
+    <!-- Open Graph / Facebook Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nvestos.com/" />
+    <meta
+      property="og:title"
+      content="Nvestos - Free Community for Traders and Copy Traders"
+    />
+    <meta
+      property="og:description"
+      content="Our community offers a space for traders to post signals and for copy traders to auto-copy the trades of professional traders. Join Waiting List"
+    />
+    <meta property="og:image" content="/public/cover.png" />
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://nvestos.com/" />
+    <meta
+      name="twitter:title"
+      content="Nvestos - Free Community for Traders and Copy Traders"
+    />
+    <meta
+      name="twitter:description"
+      content="Our community offers a space for traders to post signals and for copy traders to auto-copy the trades of professional traders. Join Waiting List"
+    />
+    <meta name="twitter:image" content="/public/cover.png" />
     <title>Nvestos - Free Community for Traders and Copy Traders</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./public/app-icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./public/app-icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./public/app-icons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./public/app-icons/site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -43,7 +86,9 @@
 
   <body>
     <div id="preloader">
-      <div class="loader"><img src="./static/brand/logo.png" alt="" /></div>
+      <div class="loader">
+        <img src="./static/brand/logo_icon.png" alt="" />
+      </div>
     </div>
     <div id="app">
       <button @click="toggleTheme" id="themeToggle" class="theme-toggle">
@@ -103,7 +148,11 @@
         <nav
           class="container nv-nav d-flex align-items-center justify-content-between"
         >
-          <img src="./static/brand/logo.png" class="nv-nav__brand" alt="" />
+          <img
+            :src="[isDarkMode ? './static/brand/logo_white.png' : './static/brand/logo_primary.png']"
+            class="nv-nav__brand"
+            alt=""
+          />
           <button
             class="nv-button nv-button--primary"
             @click="toggleWaitingList"
