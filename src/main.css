@@ -75,6 +75,16 @@ body.dark {
   height: 100px;
   animation: spin 1s linear infinite;
 }
+.spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 0.2rem solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-left: 8px;
+}
 
 @keyframes spin {
   0% {
@@ -91,6 +101,9 @@ body.loaded #preloader {
 input,
 button:focus {
   outline: none;
+}
+button:disabled {
+  opacity: 0.3 !important;
 }
 ::-webkit-scrollbar {
   width: 8px;
