@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Our community offers a space for traders to post signals and for copy traders to auto-copy the trades of professional traders. Join Waiting List"
+    />
+    <!-- Open Graph / Facebook Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nvestos.com/" />
+    <meta
+      property="og:title"
+      content="Nvestos - Free Community for Traders and Copy Traders"
+    />
+    <meta
+      property="og:description"
+      content="Our community offers a space for traders to post signals and for copy traders to auto-copy the trades of professional traders. Join Waiting List"
+    />
+    <meta property="og:image" content="/public/cover.png" />
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://nvestos.com/" />
+    <meta
+      name="twitter:title"
+      content="Nvestos - Free Community for Traders and Copy Traders"
+    />
+    <meta
+      name="twitter:description"
+      content="Our community offers a space for traders to post signals and for copy traders to auto-copy the trades of professional traders. Join Waiting List"
+    />
+    <meta name="twitter:image" content="/public/cover.png" />
+    <title>Nvestos - Free Community for Traders and Copy Traders</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./public/app-icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./public/app-icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./public/app-icons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./public/app-icons/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./packages/bootstrap/bootstrap.min.css" />
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="./packages/aos/aos.css" />
+    <!-- Toastr -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./src/main.css" />
+  </head>
+  <body>
+    <div id="app">
+      <button @click="toggleTheme" id="themeToggle" class="theme-toggle">
+        <i :class="[themeIconClass]" id="themeIcon"></i>
+      </button>
+      <div
+        class="nv-modal"
+        :class="{
+       'nv-modal--open':showOptIn
+      }"
+      >
+        <div class="nv-modal__content">
+          <div class="d-flex justify-content-end" v-if="!successState.show">
+            <span
+              href="javascript:void(0)"
+              class="close text-muted nv-text cursor--pointer"
+              @click="toggleWaitingList"
+            >
+              <i class="bi bi-x-lg"></i>
+            </span>
+          </div>
+          <div class="mt-4" v-if="!successState.show">
+            <div class="mb-5">
+              <h4 class="nv-h4 text-is--dark">Join Waiting list</h4>
+            </div>
+            <form @submit.prevent="joinWaitList" class="pb-5">
+              <div class="form-group">
+                <input
+                  class="nv-input"
+                  type="text"
+                  v-model="user.name"
+                  id=""
+                  placeholder="Full Name..."
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  class="nv-input"
+                  type="email"
+                  v-model="user.email"
+                  id=""
+                  placeholder="Email..."
+                  required
+                />
+              </div>
+              <div class="mt-4">
+                <button
+                  class="nv-button nv-button--primary w-100"
+                  type="submit"
+                  :disabled="isLoading"
+                >
+                  Submit <span v-if="isLoading" class="spinner"></span>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="mt-4 text-center" v-if="successState.show">
+            <h3 class="nv-h1 text-success">
+              <i class="bi bi-check-circle-fill"></i>
+            </h3>
+            <p class="nv-text text-is--dark">{{successState.message}}</p>
+            <div class="mt-4 d-flex justify-content-center">
+              <button
+                class="nv-button nv-button--primary"
+                type="button"
+                @click="formSubmitted"
+              >
+                Okay
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <header class="nv-header">
+        <nav
+          class="container nv-nav d-flex align-items-center justify-content-between"
+        >
+          <img
+            :src="[isDarkMode ? './static/brand/logo_white.png' : './static/brand/logo_primary.png']"
+            class="nv-nav__brand"
+            alt="Nvestos Logo"
+          />
+          <button
+            class="nv-button nv-button--primary"
+            @click="toggleWaitingList"
+          >
+            Join Waiting List
+          </button>
+        </nav>
+      </header>
+      <section class="nv-section">
+        <div class="container">
+          <h1 class="nv-h1 text-is--dark">Privacy Policy</h1>
+          <div class="my-3">
+            <p class="nv-text text-is--dark">Effective Date: May 23, 2023</p>
+            <p class="nv-text text-is--dark">
+              This Privacy Policy describes how [Your Company Name] ("we,"
+              "our," or "us") collects, uses, and shares personal information
+              when you use our Forex and Crypto Copy Trading mobile application
+              ("the App"). By downloading, installing, or using the App, you
+              consent to the practices described in this Privacy Policy.
+            </p>
+          </div>
+          <div class="my-3">
+            <h3 class="nv-h3 text-is--dark">1. Information We Collect</h3>
+            <div class="my-2">
+              <h4 class="nv-h4 text-is--dark">1.1 Personal Information:</h4>
+              <p class="nv-text text-is--dark">
+                We may collect personal information from you when you create an
+                account and use our App. The types of personal information we
+                collect may include:
+              </p>
+              <ul class="nv-text text-is--dark">
+                <li>Full name</li>
+                <li>Email address</li>
+                <li>Account credentials (username, password)</li>
+              </ul>
+            </div>
+            <div class="my-2">
+              <h4 class="nv-h4 text-is--dark">1.2 Financial Information:</h4>
+              <p class="nv-text text-is--dark">
+                To facilitate copy trading, we may require access to your
+                trading account(s) or wallet(s) linked to the App. However, we
+                will not store any financial information such as credit card
+                numbers, bank account details, or private keys on our servers.
+              </p>
+            </div>
+            <div class="my-2">
+              <h4 class="nv-h4 text-is--dark">1.3 Technical Information:</h4>
+              <p class="nv-text text-is--dark">
+                We may collect technical information about your device,
+                operating system, and App usage patterns. This information is
+                collected through cookies, log files, and similar technologies.
+              </p>
+            </div>
+          </div>
+          <div class="my-3">
+            <h3 class="nv-h3 text-is--dark">2. How We Use Your Information</h3>
+            <div class="my-2">
+              <h4 class="nv-h4 text-is--dark">2.1 Providing Services:</h4>
+              <p class="nv-text text-is--dark">
+                We use the personal information collected to create and manage
+                your account, provide you with access to the App, and enable
+                copy trading functionality.
+              </p>
+            </div>
+            <div class="my-2">
+              <h4 class="nv-h4 text-is--dark">2.2 Communication:</h4>
+              <p class="nv-text text-is--dark">
+                We may use your email address to send you important notices,
+                updates, promotional materials, or respond to your inquiries.
+              </p>
+            </div>
+            <div class="my-2">
+              <h4 class="nv-h4 text-is--dark">2.3 Improving the App:</h4>
+              <p class="nv-text text-is--dark">
+                We analyze the technical information to understand App usage
+                trends, diagnose technical issues, and improve the functionality
+                and performance of the App.
+              </p>
+            </div>
+          </div>
+          <div class="my-3">
+            <h3 class="nv-h3 text-is--dark">3. Sharing Your Information</h3>
+            <div class="my-2">
+              <h4 class="nv-h4 text-is--dark">
+                3.1 Third-Party Service Providers:
+              </h4>
+              <p class="nv-text text-is--dark">
+                We may share your personal information with third-party service
+                providers who assist us in providing and maintaining the App.
+                These service providers are contractually obligated to keep your
+                information secure and confidential.
+              </p>
+            </div>
+            <div class="my-2">
+              <h4 class="nv-h4 text-is--dark">3.2 Business Transfers:</h4>
+              <p class="nv-text text-is--dark">
+                In the event of a merger, acquisition, or sale of all or a
+                portion of our assets, your personal information may be
+                transferred to the acquiring entity.
+              </p>
+            </div>
+            <div class="my-2">
+              <h4 class="nv-h4 text-is--dark">3.3 Legal Requirements:</h4>
+              <p class="nv-text text-is--dark">
+                We may disclose your personal information if required by law,
+                regulation, legal process, or government request.
+              </p>
+            </div>
+          </div>
+          <div class="my-3">
+            <h3 class="nv-h3 text-is--dark">4. Data Security</h3>
+            <p class="nv-text text-is--dark">
+              We implement reasonable security measures to protect your personal
+              information from unauthorized access, disclosure, alteration, or
+              destruction. However, please note that no method of transmission
+              over the Internet or electronic storage is completely secure.
+            </p>
+          </div>
+          <div class="my-3">
+            <h3 class="nv-h3 text-is--dark">5. Your Choices</h3>
+            <p class="nv-text text-is--dark">
+              You may review, update, or delete your personal information by
+              accessing your account settings within the App. If you have any
+              concerns about the processing of your personal information or
+              would like to exercise your rights, please contact us using the
+              information provided at the end of this Privacy Policy.
+            </p>
+          </div>
+          <div class="my-3">
+            <h3 class="nv-h3 text-is--dark">6. Children's Privacy</h3>
+            <p class="nv-text text-is--dark">
+              The App is not intended for individuals under the age of 18. We do
+              not knowingly collect personal information from children. If we
+              become aware that we have collected personal information from a
+              child without parental consent, we will take steps to delete the
+              information promptly.
+            </p>
+          </div>
+          <div class="my-3">
+            <h3 class="nv-h3 text-is--dark">
+              7. Changes to this Privacy Policy
+            </h3>
+            <p class="nv-text text-is--dark">
+              We reserve the right to update or modify this Privacy Policy at
+              any time. We will notify you of any material changes by posting
+              the revised Privacy Policy within the App or by other means. Your
+              continued use of the App after the effective date of the revised
+              Privacy Policy constitutes your acceptance of the changes.
+            </p>
+          </div>
+          <div class="my-3">
+            <h3 class="nv-h3 text-is--dark">8. Contact Us</h3>
+            <p class="nv-text text-is--dark">
+              If you have any questions, concerns, or requests regarding this
+              Privacy Policy, please contact us at info@nvestos.com. By using
+              the App, you acknowledge that you have read and understood this
+              Privacy Policy and agree to the collection, use, and sharing of
+              your personal information as described herein.
+            </p>
+          </div>
+        </div>
+      </section>
+      <footer class="nv-footer">
+        <div
+          class="container d-block d-lg-flex align-items-center justify-content-between"
+        >
+          <div class="my-2">
+            <p class="small text-is--dark mb-0">
+              &copy;{{currentYear}} Nvestos. All rights reserved
+            </p>
+          </div>
+          <div class="nv-footer__links my-2">
+            <!-- <a href="#!">Terms and Conditions</a> -->
+            <a href="/privacy-policy">Privacy Policy</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- Vue@3 Cdn -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- jQuery -->
+    <script src="./packages/jquery/jquery.min.js"></script>
+    <!-- PopperJS -->
+    <script src="./packages/popper/popper.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="./packages/bootstrap/bootstrap.min.js"></script>
+    <!-- AOS -->
+    <script src="./packages/aos/aos.js"></script>
+    <!-- Toastr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- CustomJS -->
+    <script src="./src/main.js"></script>
+    <script src="./src/App.js"></script>
+    <script>
+      AOS.init({
+        once: true,
+      });
+    </script>
+  </body>
+</html>
